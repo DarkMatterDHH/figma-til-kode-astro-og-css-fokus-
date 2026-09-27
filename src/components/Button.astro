@@ -1,0 +1,43 @@
+---
+type Props = {
+  size?: "compact" | "wide";
+  type?: "button" | "submit" | "reset";
+};
+
+const { size = "compact", type = "button" } = Astro.props;
+---
+
+<button class:list={["button", `button--${size}`]} type={type}>
+  <slot />
+</button>
+
+<style>
+  .button {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    background-color: #ffd447;
+    color: #07101e;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+
+  .button--compact {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .button--wide {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  :global([data-type="dark"]) .button {
+    background-color: #07101e;
+    color: #fff;
+    border-color: #3a4658;
+  }
+</style>
