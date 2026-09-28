@@ -75,17 +75,17 @@ const classes = ["button", `button--${size}`, `button--${variant}`];
     border-color: transparent;
   }
 
-  /* Standardknappen bliver gul i en lys container. */
+  /* Standardknappen bliver mørk i en lys container. */
   :global([data-type="white"]) .button--default {
-    background-color: #ffd447;
-    color: #07101e;
-    border-color: transparent;
-  }
-
-  /* Mørk variant. */
-  .button--light {
     background-color: #07101e;
     color: #fff;
     border-color: #3a4658;
+  }
+
+  /* gul variant. */
+  .button--light {
+    background-color: #ffd447;
+    color: #07101e;
+    border-color: transparent;
   }
 </style>

@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Services from "./Services.astro";
 import CEOImage from "@assets/images/ceo.webp";
+import Button from "./Button.astro";
 ---
 
 <section class="hero">
@@ -12,8 +13,12 @@ import CEOImage from "@assets/images/ceo.webp";
       the next level. Let us help you navigate challenges and achieve
       sustainable success.
     </p>
-    <a href="#0">Book a Meeting</a>
-    <a href="#0">Learn More</a>
+    <section>
+      <Button href="#0">Book a Meeting</Button>
+    </section>
+    <section data-type="white">
+      <Button href="#0">Learn More</Button>
+    </section>
   </div>
   <Image src={CEOImage} alt="CEO" />
 
