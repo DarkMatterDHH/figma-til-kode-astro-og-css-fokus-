@@ -68,24 +68,24 @@ const classes = ["button", `button--${size}`, `button--${variant}`];
     font-size: 1rem;
   }
 
-  /* Standardknappen bliver mørk i en mørk container. */
+  /* Standardknappen bliver lys i en mørk container. */
   :global([data-type="dark"]) .button--default {
-    background-color: #07101e;
-    color: #fff;
-    border-color: #3a4658;
+    background-color: #f5f6f8;
+    color: #101522;
+    border-color: transparent;
   }
 
   /* Standardknappen bliver gul i en lys container. */
   :global([data-type="white"]) .button--default {
-    background-color: #fff;
+    background-color: #ffd447;
     color: #07101e;
     border-color: transparent;
   }
 
-  /* Lys variant, fx Login-knappen i den mørke header. */
+  /* Mørk variant. */
   .button--light {
-    background-color: #f5f6f8;
-    color: #101522;
-    border-color: transparent;
+    background-color: #07101e;
+    color: #fff;
+    border-color: #3a4658;
   }
 </style>
