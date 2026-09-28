@@ -1,13 +1,20 @@
 ---
 import Button from "./Button.astro";
+
+const normalizePath = (path: string) => path.replace(/\/+$/, "") || "/";
+const currentPath = normalizePath(Astro.url.pathname);
+
 // Links, der vises i navigationen.
 // Sæt active til true på den aktuelle side.
 const navItems = [
-  { label: "Home", href: "/", active: true },
-  { label: "Case Studies", href: "/case-studies", active: false },
-  { label: "Team", href: "/team", active: false },
-  { label: "About", href: "/about", active: false },
-];
+  { label: "Home", href: "/" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Team", href: "/team" },
+  { label: "About", href: "/about" },
+].map((item) => ({
+  ...item,
+  active: currentPath === normalizePath(item.href),
+}));
 ---
 
 <!-- Sidens hovednavigation med logo, links og login-knap. -->
@@ -34,9 +41,9 @@ const navItems = [
     </nav>
 
     <!-- Link til login-siden. -->
-    <section>
+    <div class="login">
       <Button href="/login">Login</Button>
-    </section>
+    </div>
   </div>
 </header>
 
@@ -96,7 +103,7 @@ const navItems = [
   }
 
   /* Login-linket styles, så det ligner en lys, rund knap. */
-  .header-inner > section {
+  .header-inner > .login {
     justify-self: end;
   }
 

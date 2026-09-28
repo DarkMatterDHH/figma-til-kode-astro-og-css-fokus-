@@ -32,5 +32,27 @@ import Button from "./Button.astro";
       background-color: #f3f4f6;
       padding: 2rem;
     }
+
+    .hero {
+      display: grid;
+      grid-template-areas:
+        "content image"
+        "Services Services";
+    }
+    .hero-content {
+      grid-area: content;
+      align-self: center;
+    }
+    .image {
+      grid-area: "image";
+      min-height: 32rem;
+    }
+
+    .image :global(img) {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 </style>
