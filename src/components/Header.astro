@@ -1,0 +1,104 @@
+---
+const navItems = [
+  { label: "Home", href: "/", active: true },
+  { label: "Case Studies", href: "/case-studies", active: false },
+  { label: "Team", href: "/team", active: false },
+  { label: "About", href: "/about", active: false },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/" aria-label="AskExperts – forsiden">
+      Ask<span>Experts</span>
+    </a>
+
+    <nav aria-label="Hovednavigation">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={["nav-link", item.active && "active"]}
+            aria-current={item.active ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a class="login-button" href="/login">Login</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: #030815;
+    color: #f5f6f8;
+    padding: 2.25rem 1.5rem;
+  }
+
+  .header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    color: #f5f6f8;
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .logo span {
+    color: #ffd447;
+  }
+
+  nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    position: relative;
+    color: #e5e7eb;
+    font-size: 1.125rem;
+    text-decoration: none;
+  }
+
+  .nav-link.active::after {
+    position: absolute;
+    right: 0;
+    bottom: -0.5rem;
+    left: 0;
+    height: 4px;
+    background: #ffd447;
+    content: "";
+  }
+
+  .login-button {
+    justify-self: end;
+    padding: 0.55rem 1.75rem;
+    border-radius: 999px;
+    background: #f5f6f8;
+    color: #101522;
+    text-decoration: none;
+  }
+
+  @media (max-width: 700px) {
+    .header-inner {
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+    }
+
+    nav {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+  }
+</style>
