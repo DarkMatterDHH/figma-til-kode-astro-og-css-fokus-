@@ -11,7 +11,7 @@ const navItems = [
 ---
 
 <!-- Sidens hovednavigation med logo, links og login-knap. -->
-<header class="site-header">
+<header class="site-header" data-type="dark">
   <div class="header-inner">
     <!-- Logoet linker tilbage til forsiden. -->
     <a class="logo" href="/" aria-label="AskExperts – forsiden">
@@ -34,7 +34,9 @@ const navItems = [
     </nav>
 
     <!-- Link til login-siden. -->
-    <Button href="/login">Login</Button>
+    <section data-type="white">
+      <Button href="/login">Login</Button>
+    </section>
   </div>
 </header>
 
@@ -94,13 +96,8 @@ const navItems = [
   }
 
   /* Login-linket styles, så det ligner en lys, rund knap. */
-  .login-button {
+  .header-inner > section {
     justify-self: end;
-    padding: 0.55rem 1.75rem;
-    border-radius: 999px;
-    background: #f5f6f8;
-    color: #101522;
-    text-decoration: none;
   }
 
   /* Tilpas layoutet til mindre skærme. */

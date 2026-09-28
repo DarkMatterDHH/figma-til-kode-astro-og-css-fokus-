@@ -9,7 +9,7 @@ type Props = {
   // Hvis href er angivet, vises knappen som et link.
   href?: string;
 
-  // Brug "light" til eksempelvis Login-knappen i en mørk header.
+  // Brug "light" til en lys knap, fx Login i en mørk header.
   variant?: "default" | "light";
 };
 
@@ -38,7 +38,7 @@ const classes = ["button", `button--${size}`, `button--${variant}`];
 }
 
 <style>
-  /* Grundstil og standardfarver for knappen. */
+  /* Grundstil og standardfarver, når der ikke er angivet data-type. */
   .button {
     display: inline-flex;
     align-items: center;
@@ -75,9 +75,17 @@ const classes = ["button", `button--${size}`, `button--${variant}`];
     border-color: #3a4658;
   }
 
-  /* Lys variant, eksempelvis til Login i den mørke header. */
+  /* Standardknappen bliver gul i en lys container. */
+  :global([data-type="white"]) .button--default {
+    background-color: #fff;
+    color: #07101e;
+    border-color: transparent;
+  }
+
+  /* Lys variant, fx Login-knappen i den mørke header. */
   .button--light {
     background-color: #f5f6f8;
     color: #101522;
+    border-color: transparent;
   }
 </style>
