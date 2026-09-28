@@ -1,4 +1,7 @@
 ---
+import Button from "./Button.astro";
+// Links, der vises i navigationen.
+// Sæt active til true på den aktuelle side.
 const navItems = [
   { label: "Home", href: "/", active: true },
   { label: "Case Studies", href: "/case-studies", active: false },
@@ -7,12 +10,15 @@ const navItems = [
 ];
 ---
 
+<!-- Sidens hovednavigation med logo, links og login-knap. -->
 <header class="site-header">
   <div class="header-inner">
+    <!-- Logoet linker tilbage til forsiden. -->
     <a class="logo" href="/" aria-label="AskExperts – forsiden">
       Ask<span>Experts</span>
     </a>
 
+    <!-- Navigationens links oprettes ud fra navItems-listen. -->
     <nav aria-label="Hovednavigation">
       {
         navItems.map((item) => (
@@ -27,17 +33,20 @@ const navItems = [
       }
     </nav>
 
-    <a class="login-button" href="/login">Login</a>
+    <!-- Link til login-siden. -->
+    <Button href="/login">Login</Button>
   </div>
 </header>
 
 <style>
+  /* Baggrund og grundfarve for hele headeren. */
   .site-header {
     background: #030815;
     color: #f5f6f8;
     padding: 2.25rem 1.5rem;
   }
 
+  /* Placerer logo, navigation og login i tre kolonner. */
   .header-inner {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -46,6 +55,7 @@ const navItems = [
     margin: 0 auto;
   }
 
+  /* Logoets tekststil og farver. */
   .logo {
     color: #f5f6f8;
     font-size: 1.75rem;
@@ -53,15 +63,18 @@ const navItems = [
     text-decoration: none;
   }
 
+  /* Giver anden del af logoet den gule accentfarve. */
   .logo span {
     color: #ffd447;
   }
 
+  /* Viser navigationslinks på én række med mellemrum. */
   nav {
     display: flex;
     gap: 2rem;
   }
 
+  /* Grundstil for navigationslinks. */
   .nav-link {
     position: relative;
     color: #e5e7eb;
@@ -69,6 +82,7 @@ const navItems = [
     text-decoration: none;
   }
 
+  /* Gul markering under det aktive navigationslink. */
   .nav-link.active::after {
     position: absolute;
     right: 0;
@@ -79,6 +93,7 @@ const navItems = [
     content: "";
   }
 
+  /* Login-linket styles, så det ligner en lys, rund knap. */
   .login-button {
     justify-self: end;
     padding: 0.55rem 1.75rem;
@@ -88,12 +103,14 @@ const navItems = [
     text-decoration: none;
   }
 
+  /* Tilpas layoutet til mindre skærme. */
   @media (max-width: 700px) {
     .header-inner {
       grid-template-columns: 1fr auto;
       gap: 1.5rem;
     }
 
+    /* Flyt navigationen ned under logo og login, og tillad linjeskift. */
     nav {
       grid-column: 1 / -1;
       grid-row: 2;

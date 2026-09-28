@@ -1,22 +1,53 @@
 ---
 type Props = {
+  // Bestemmer knappens størrelse.
   size?: "compact" | "wide";
+
+  // Bestemmer typen, når komponenten viser et <button>-element.
   type?: "button" | "submit" | "reset";
+
+  // Hvis href er angivet, vises knappen som et link.
+  href?: string;
+
+  // Brug "light" til eksempelvis Login-knappen i en mørk header.
+  variant?: "default" | "light";
 };
 
-const { size = "compact", type = "button" } = Astro.props;
+// Standardværdier bruges, hvis der ikke gives props.
+const {
+  size = "compact",
+  type = "button",
+  href,
+  variant = "default",
+} = Astro.props;
+
+// Samme CSS-klasser bruges til både links og knapper.
+const classes = ["button", `button--${size}`, `button--${variant}`];
 ---
 
-<button class:list={["button", `button--${size}`]} type={type}>
-  <slot />
-</button>
+<!-- Vis et link, hvis href er angivet; ellers vises en almindelig knap. -->{
+  href ? (
+    <a class:list={classes} href={href}>
+      <slot />
+    </a>
+  ) : (
+    <button class:list={classes} type={type}>
+      <slot />
+    </button>
+  )
+}
 
 <style>
+  /* Grundstil og standardfarver for knappen. */
   .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid transparent;
     border-radius: 999px;
     cursor: pointer;
     font: inherit;
+    text-decoration: none;
     background-color: #ffd447;
     color: #07101e;
     transition:
@@ -24,20 +55,29 @@ const { size = "compact", type = "button" } = Astro.props;
       color 0.2s;
   }
 
+  /* Kompakt knap med indholdstilpasset bredde. */
   .button--compact {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
   }
 
+  /* Bred knap, der fylder hele containeren. */
   .button--wide {
     width: 100%;
     padding: 1rem 1.5rem;
     font-size: 1rem;
   }
 
-  :global([data-type="dark"]) .button {
+  /* Standardknappen bliver mørk i en mørk container. */
+  :global([data-type="dark"]) .button--default {
     background-color: #07101e;
     color: #fff;
     border-color: #3a4658;
+  }
+
+  /* Lys variant, eksempelvis til Login i den mørke header. */
+  .button--light {
+    background-color: #f5f6f8;
+    color: #101522;
   }
 </style>
