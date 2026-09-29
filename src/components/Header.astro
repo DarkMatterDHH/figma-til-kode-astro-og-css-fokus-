@@ -48,78 +48,60 @@ const navItems = [
 </header>
 
 <style>
-  /* Baggrund og grundfarve for hele headeren. */
   .site-header {
-    background: #030815;
-    color: #f5f6f8;
-    padding: 2.25rem 1.5rem;
+    grid-column: full-start / full-end;
+    background: var(--color-neutrals-900);
+    color: var(--color-on-surface-elevated);
+    padding: var(--space-4) var(--space-6);
   }
 
-  /* Placerer logo, navigation og login i tre kolonner. */
   .header-inner {
+    grid-column: 1 / -1;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: min(100%, 1200px);
+    min-width: 0;
+    margin-inline: auto;
   }
 
-  /* Logoets tekststil og farver. */
   .logo {
-    color: #f5f6f8;
-    font-size: 1.75rem;
-    font-weight: 600;
+    color: var(--color-on-surface-elevated);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
     text-decoration: none;
+    white-space: nowrap;
   }
 
-  /* Giver anden del af logoet den gule accentfarve. */
   .logo span {
-    color: #ffd447;
+    color: var(--color-action);
   }
 
-  /* Viser navigationslinks på én række med mellemrum. */
   nav {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    gap: var(--space-6);
   }
 
-  /* Grundstil for navigationslinks. */
   .nav-link {
     position: relative;
-    color: #e5e7eb;
-    font-size: 1.125rem;
+    color: var(--color-on-surface-elevated);
+    font-size: var(--font-size-sm);
     text-decoration: none;
+    white-space: nowrap;
   }
 
-  /* Gul markering under det aktive navigationslink. */
   .nav-link.active::after {
     position: absolute;
     right: 0;
-    bottom: -0.5rem;
+    bottom: -0.6rem;
     left: 0;
-    height: 4px;
-    background: #ffd447;
+    height: 3px;
+    background: var(--color-action);
     content: "";
   }
 
-  /* Login-linket styles, så det ligner en lys, rund knap. */
   .header-inner > .login {
     justify-self: end;
-  }
-
-  /* Tilpas layoutet til mindre skærme. */
-  @media (max-width: 700px) {
-    .header-inner {
-      grid-template-columns: 1fr auto;
-      gap: 1.5rem;
-    }
-
-    /* Flyt navigationen ned under logo og login, og tillad linjeskift. */
-    nav {
-      grid-column: 1 / -1;
-      grid-row: 2;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
   }
 </style>
