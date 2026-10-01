@@ -1,0 +1,100 @@
+---
+import Checkmark from "@icons/checkmark.svg";
+import { Image } from "astro:assets";
+import expectation from "@assets/images/expectation.jpg";
+---
+
+<section class="expectation">
+  <Image class="expec-image" src={expectation} alt="CEO" />
+  <div>
+    <h3>WE'LL WORK WITH YOU</h3>
+    <h2>What To Expect</h2>
+    <p>
+      Our collaberation is built on transparentcy, efficiency, and measurable
+      result. Together, we create strategies tailored to your uniqe needs and
+      goal.
+    </p>
+    <div>
+      <p>
+        <Checkmark />collaberation to build actionable strategies that drive
+        sustainable growth and deliver tangible outcomes
+      </p>
+      <p>
+        <Checkmark />Identify oppotunities to optimize processes and implement
+        impactful solutions with measurable results.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .expectation {
+      position: relative;
+      display: grid;
+      grid-column: content-start / content-end;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: var(--space-8);
+      padding-block: var(--space-16);
+    }
+
+    .expec-image {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      aspect-ratio: 1.6;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+    }
+
+    .expectation > div {
+      min-width: 0;
+    }
+
+    .expectation h3 {
+      margin: 0 0 var(--space-2);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: 0.08em;
+    }
+
+    .expectation h2 {
+      margin: 0 0 var(--space-2);
+      color: var(--color-text);
+      font-size: var(--font-size-2xl);
+      line-height: var(--line-height-heading);
+    }
+
+    .expectation p {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-normal);
+    }
+
+    .expectation > div > p {
+      margin: 0 0 var(--space-4);
+    }
+
+    .expectation > div > div {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .expectation > div > div p {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-2);
+      margin: 0;
+    }
+
+    .expectation :global(svg) {
+      width: 0.875rem;
+      height: 0.875rem;
+      flex: 0 0 auto;
+      color: var(--color-ui-secondary-alternative);
+    }
+  }
+</style>
