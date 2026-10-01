@@ -1,81 +1,108 @@
 # Refleksion – Figma til kode
 
-**Gruppemedlemmer:** Skriv begge navne her.
+**Gruppemedlem:** Danny
 
-## Sådan bruger I filen
-
-Skriv jeres fælles refleksion direkte i denne fil. Erstat hjælpeteksterne med jeres egne erfaringer, og slet Markdown-guiden og demoen inden aflevering. Skriv kort og konkret, og brug eksempler fra jeres egen kode.
-
-Åbn forhåndsvisningen i VS Code med **Cmd + Shift + V** (Mac) eller **Ctrl + Shift + V** (Windows). Så ser I, hvordan Markdown bliver vist. På GitHub vises formateringen automatisk, når I åbner filen.
-
-### Mini-guide til Markdown
-
-- `# Titel` er dokumentets hovedoverskrift. Brug kun én.
-- `## Afsnit` og `### Underafsnit` giver overskrifter i flere niveauer.
-- `**vigtig tekst**` bliver til **vigtig tekst**.
-- En bindestreg efterfulgt af et mellemrum laver en punktopstilling som denne.
-- Skriv kode inde i en sætning mellem enkelte backticks, fx `getTeamMembers()`.
-- Links skrives sådan: `[Astros dokumentation](https://docs.astro.build/)`.
-- Lav et nyt afsnit med en tom linje. Brug også en tom linje før og efter lister og kodeblokke.
-
-En kodeblok starter og slutter med tre backticks. Skriv sproget efter de første, fx `js`, `css`, `html` eller `astro`. Se et eksempel i filens kildekode nedenfor.
-
-### Kort demo – sådan kan tekst, kode og link kombineres
-
-> Dette er et opdigtet eksempel på formen, ikke en færdig refleksion eller et ekstra krav.
-
-Vi flyttede datahentningen til en fælles funktion, så endpointet kun skal vedligeholdes ét sted.
-
-```js
-export function getServices() {
-  return apiFetch("https://ftk-api.pages.dev/services");
-}
-```
-
-I komponenten kalder vi `getServices()`. Vi kontrollerede, at de samme servicetitler blev vist før og efter ændringen. Næste skridt er at undersøge, hvad der sker, hvis API'et returnerer en fejl.
-
-Reference: [Datahentning i Astro](https://docs.astro.build/en/guides/data-fetching/).
-
----
-
-## Eksempel 1: Skriv navnet på et valgt benspænd
+## Eksempel 1: CSS Grid og layout fra Figma
 
 ### Hvor og hvorfor?
 
-Hvor i løsningen bruger I teknikken, og hvilket konkret problem løser den? Henvis gerne til en fil, fx `src/components/MinKomponent.astro`.
+Jeg brugte CSS Grid til at bygge hero-sektionen i `src/components/Hero.astro`. Teksten og billedet skulle stå ved siden af hinanden, mens servicekortene skulle placeres på én række og overlappe hero-sektionens nederste kant.
+
+Grid hjalp mig med at styre placeringen af de store dele af siden. Jeg fandt også ud af, at det ikke er nok at sætte `grid-template-columns` på en komponent: komponentens placering afhænger også af dens forælder og af, hvilke grid-linjer der faktisk er defineret.
 
 ### Relevant kode
 
-Indsæt en kort kodeblok fra jeres løsning. Vælg det passende sprog, og forklar den del, der er vigtig for jeres valg.
+I `src/components/Services.astro` bruger jeg tre kolonner til kortene:
+
+```css
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: var(--space-2);
+}
+```
+
+`minmax(0, 1fr)` gør, at kolonnerne kan blive mindre uden at langt indhold tvinger dem bredere.
 
 ### Afprøvning og ændringer
 
-- **Vi testede:** Beskriv situationen, fx en smal skærm, lang tekst eller tastaturbetjening.
-- **Vi observerede:** Hvad skete der konkret?
-- **Vi ændrede eller mangler:** Hvad rettede I, eller hvad vil være næste skridt?
+- **Jeg testede:** Jeg sammenlignede sidens udseende med referencebilledet i browseren.
+- **Jeg observerede:** Kortene stod først lodret. Det skyldtes, at deres fælles container ikke havde tre grid-kolonner.
+- **Jeg ændrede eller mangler:** Jeg satte `grid-template-columns` til tre kolonner. Jeg mangler stadig at kontrollere layoutet grundigt på smalle skærme og sikre, at grid-linjerne i `global.css` passer til sidens faktiske HTML-struktur.
 
-## Eksempel 2: Skriv navnet på et valgt benspænd
+## Eksempel 2: Design tokens til farver, afstand og typografi
 
-Brug samme struktur som i eksempel 1: Hvor og hvorfor? Relevant kode. Afprøvning og ændringer.
+### Hvor og hvorfor?
 
-## Eksempel 3: Skriv navnet på et valgt benspænd
+Jeg arbejdede med `src/styles/tokens.css` for at samle designværdier ét sted. Formålet var at kunne genbruge de samme farver, afstande, typografiske størrelser og hjørneradier i headeren, hero-sektionen, servicekortene og sektionen “What To Expect”.
 
-Brug samme struktur som i eksempel 1: Hvor og hvorfor? Relevant kode. Afprøvning og ændringer.
+Jeg fandt også ud af, at farver skal vælges efter baggrunden. `--color-text` er mørk og passer på en lys flade, mens tekst på den mørke hero skal bruge et lyst token som `--color-on-surface-elevated`.
+
+### Relevant kode
+
+Eksempel på farvetokens fra `tokens.css`:
+
+```css
+--color-action: var(--color-yellow-500);
+--color-text: var(--color-neutrals-900);
+--color-surface-elevated: var(--color-blue-700);
+--color-on-surface-elevated: var(--color-neutrals-50);
+```
+
+I komponenterne bruger jeg tokens i stedet for at gentage farveværdier:
+
+```css
+color: var(--color-on-surface-elevated);
+background: var(--color-surface-elevated);
+```
+
+### Afprøvning og ændringer
+
+- **Jeg testede:** Jeg sammenlignede farver og afstande visuelt med referencebilledet.
+- **Jeg observerede:** Mørk tekst på den mørke hero havde for lav kontrast. Jeg opdagede også, at nogle font-tokennavne i `global.css` ikke fandtes i `tokens.css`.
+- **Jeg ændrede eller mangler:** Jeg begyndte at bruge de eksisterende farvetokens. Jeg mangler at kontrollere, at alle typografi- og spacing-tokens er defineret og at `global.css` bruger de samme navne.
+
+## Eksempel 3: Genbrugelige komponenter og data
+
+### Hvor og hvorfor?
+
+Jeg opdelte serviceområdet i `Services.astro` og `ServiceCard.astro`. `Services.astro` henter service-data fra API'et og viser et kort for hver service. `ServiceCard.astro` står for udseendet af det enkelte kort.
+
+Det gør det lettere at ændre kortenes layout ét sted og kortets indhold eller stil et andet sted.
+
+### Relevant kode
+
+`Services.astro` opretter et kort for hvert element i API-svaret:
+
+```astro
+<div class="services">
+  {serviceData.map((service) => <ServiceCard service={service} />)}
+</div>
+```
+
+### Afprøvning og ændringer
+
+- **Jeg testede:** Jeg så, at servicekortene blev vist på siden, og justerede containeren, så den brugte tre kolonner.
+- **Jeg observerede:** Layoutet af kortenes fælles container bestemmes i `Services.astro`, mens baggrund, tekst og indhold i det enkelte kort bestemmes i `ServiceCard.astro`.
+- **Jeg ændrede eller mangler:** Jeg mangler at håndtere situationer, hvor API-kaldet fejler eller returnerer tomme data. Jeg bør også kontrollere, hvordan kortene opfører sig, hvis en beskrivelse er meget lang.
 
 ## Fallback og robusthed
 
-Dette må gerne indgå i de tre eksempler ovenfor. Hvis det allerede er dækket dér, kan I slette dette afsnit.
+Jeg har brugt `minmax(0, 1fr)` i grid-layoutet, så indhold ikke så let tvinger en kolonne bredere end den tilgængelige plads. Jeg har også arbejdet med media queries, så layoutet kan ændres på mindre skærme.
 
-- **Fallback/progressive enhancement:** Beskriv mindst ét konkret eksempel. Hvad oplever brugeren med og uden understøttelse? Link til dokumentation for den valgte feature, og angiv de browsere og versioner, I har testet.
-- **Defensive CSS:** Vis et konkret eksempel på, hvordan løsningen håndterer fx lang tekst eller lidt plads.
-- **Global CSS og komponent-CSS:** Forklar kort, hvad I har placeret hvor, og hvorfor.
+En fallback for skrifttypen kan være en systemfont, hvis den ønskede skrifttype ikke kan indlæses:
+
+```css
+font-family: Inter, system-ui, sans-serif;
+```
+
+Jeg har ikke systematisk testet forskellige browsere eller browser-versioner. Indtil videre har jeg primært kontrolleret layoutet visuelt i min browser. Næste skridt er at teste på en smal skærm og kontrollere, at layoutet stadig fungerer, når teksten fylder mere end i referencebilledet.
+
+Global CSS bruger jeg til fælles styles og sidens overordnede layout. Komponenternes CSS bruger jeg til de enkelte dele, fx hero, servicekort og forventningssektionen.
 
 ## Brug af AI
 
-Hvis I har brugt AI til en væsentlig del af løsningen, så beskriv kort:
+Jeg brugte AI til at få hjælp til CSS Grid, design tokens, Astro-billedimporter og til at sammenligne mit resultat med referencebillederne.
 
-- Hvad brugte I den til?
-- Hvad ændrede eller fravalgte I i svaret?
-- Hvad lærte I, og hvordan kontrollerede I løsningen?
-
-Hvis I ikke har brugt AI, kan I blot skrive det. I skal ikke indsætte en komplet chatlog.
+Jeg lærte især, at det er vigtigt at kontrollere både CSS-reglerne, tokennavnene og komponenternes placering i HTML-strukturen, når noget ikke ser ud som forventet.
