@@ -39,6 +39,18 @@ import expectation from "@assets/images/expectation.jpg";
       padding-block: var(--space-16);
     }
 
+    .expectation::before {
+      position: absolute;
+      top: var(--space-12);
+      left: calc(var(--space-4) * -1);
+      z-index: 0;
+      width: 5rem;
+      height: 4.25rem;
+      border-radius: var(--radius-lg);
+      background: var(--color-ui-secondary);
+      content: "";
+    }
+
     .expec-image {
       position: relative;
       z-index: 1;
