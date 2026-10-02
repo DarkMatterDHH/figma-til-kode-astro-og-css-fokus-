@@ -1,0 +1,72 @@
+---
+import experience from "@data/experience.json";
+import DoughnutChart from "./DoughnutChart.astro";
+---
+
+<section class="experience">
+  <div class="experience-inner">
+    <div class="intro">
+      <p class="eyebrow">{experience.eyebrow}</p>
+      <h2>{experience.title}</h2>
+      <p class="subtitle">{experience.subtitle}</p>
+    </div>
+
+    <div class="stats">
+      {
+        experience.stats.map((stat) => (
+          <DoughnutChart value={stat.value} label={stat.label} />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .experience {
+      grid-column: full-start / full-end;
+      display: grid;
+      grid-template-columns: subgrid;
+      background: var(--color-action);
+      padding-block: var(--space-16);
+    }
+
+    .experience-inner {
+      grid-column: content-start / content-end;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.1fr);
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    .intro {
+      color: var(--color-neutrals-900);
+    }
+
+    .eyebrow {
+      margin: 0 0 var(--space-6);
+      font-size: var(--font-size-sm);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .intro h2 {
+      margin: 0 0 var(--space-4);
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      line-height: var(--line-height-heading);
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: var(--font-size-md);
+      line-height: var(--line-height-normal);
+    }
+  }
+</style>
