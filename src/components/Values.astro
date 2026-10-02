@@ -1,0 +1,171 @@
+---
+import coreValues from "@data/coreValues.json";
+import Button from "./Button.astro";
+
+import LayersIcon from "@icons/layers.svg";
+import BarsIcon from "@icons/bars.svg";
+import GlobeIcon from "@icons/globe.svg";
+import GearIcon from "@icons/gear.svg";
+
+const icons = {
+  layers: LayersIcon,
+  bars: BarsIcon,
+  globe: GlobeIcon,
+  gear: GearIcon,
+};
+---
+
+<section class="values" data-type="dark" aria-labelledby="values-title">
+  <div class="values-inner">
+    <div class="values-heading">
+      <div>
+        <p class="eyebrow">{coreValues.eyebrow}</p>
+        <h2 id="values-title">{coreValues.title}</h2>
+        <p class="subtitle">{coreValues.subtitle}</p>
+      </div>
+
+      <Button href={coreValues.button.link} variant="default">
+        {coreValues.button.text}
+      </Button>
+    </div>
+
+    <div class="value-cards">
+      {
+        coreValues.values.map((value) => {
+          const Icon = icons[value.icon as keyof typeof icons];
+
+          return (
+            <article class="value-card">
+              <div class="icon">{Icon && <Icon aria-hidden="true" />}</div>
+
+              <h3>{value.title}</h3>
+              <p>{value.description}</p>
+
+              <a class="read-more" href={value.link.url}>
+                {value.link.text}
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .values {
+      grid-column: full-start / full-end;
+      display: grid;
+      grid-template-columns: subgrid;
+      padding-block: var(--space-16);
+      background-color: var(--color-neutrals-900);
+      color: var(--color-on-surface-elevated);
+    }
+
+    .values-inner {
+      grid-column: content-start / content-end;
+      min-width: 0;
+    }
+
+    .values-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+
+    .values-heading > div {
+      max-width: 42rem;
+    }
+
+    .eyebrow {
+      margin: 0 0 var(--space-3);
+      color: var(--color-neutrals-200);
+      font-size: var(--font-size-sm);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .values-heading h2 {
+      margin: 0 0 var(--space-3);
+      color: var(--color-on-surface-elevated);
+      font-size: var(--font-size-3xl);
+      line-height: var(--line-height-heading);
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--color-neutrals-200);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .value-cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-6);
+      align-items: stretch;
+    }
+
+    .value-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      background-color: var(--color-surface-primary);
+      color: var(--color-text);
+    }
+
+    .icon {
+      display: grid;
+      width: 3rem;
+      aspect-ratio: 1;
+      place-items: center;
+      margin-bottom: var(--space-5);
+      border-radius: var(--radius-pill);
+      background-color: var(--color-neutrals-900);
+      color: var(--color-on-surface-elevated);
+    }
+
+    .icon :global(svg) {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .value-card h3 {
+      margin: 0 0 var(--space-3);
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-heading);
+    }
+
+    .value-card p {
+      margin: 0;
+      color: var(--color-text-muted);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      align-self: flex-start;
+      margin-top: auto;
+      padding-top: var(--space-5);
+      color: var(--color-text);
+      font-weight: var(--font-weight-semibold);
+      text-decoration: none;
+    }
+
+    .read-more span {
+      font-size: var(--font-size-xl);
+    }
+
+    .read-more:focus-visible {
+      outline: 2px solid var(--color-action);
+      outline-offset: 4px;
+    }
+  }
+</style>
