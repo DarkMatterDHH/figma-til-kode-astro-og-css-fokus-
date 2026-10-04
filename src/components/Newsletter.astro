@@ -11,7 +11,9 @@ import Button from "./Button.astro";
     </p>
 
     <form class="newsletter-form">
-      <input type="email" placeholder="your mail address" />
+      <div>
+        <input type="email" placeholder="your mail address" />
+      </div>
       <div>
         <Button>Subscribe</Button>
       </div>
@@ -41,18 +43,18 @@ import Button from "./Button.astro";
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
+      gap: 0.75rem;
       width: min(100%, 42rem);
       min-width: 0;
-      overflow: hidden;
     }
-
     .newsletter-form input {
       border-radius: var(--radius-pill);
       border: 1px solid rgba(255, 255, 255, 0.55);
       background: transparent;
       color: var(--color-neutrals-50);
       padding: 1.1rem 1.4rem;
-      min-height: 4.2rem;
+      height: 2rem;
+      width: 50%;
     }
 
     .eyebrow {
