@@ -67,4 +67,162 @@ import contactMeeting from "@assets/images/contact-meeting.jpg";
   </div>
 </section>
 
-<style></style>
+<style>
+  @layer components {
+    .contact {
+      grid-column: full-start / full-end;
+      display: grid;
+      grid-template-columns: subgrid;
+      align-items: center;
+      padding-block: var(--space-16);
+      background: var(--color-surface-primary);
+    }
+
+    .contact-copy {
+      grid-column: content-start / center;
+      min-width: 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 var(--space-4);
+      color: var(--color-neutrals-700);
+      font-size: var(--font-size-sm);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .contact-copy h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 3vw, 4rem);
+      line-height: var(--line-height-tight);
+      color: var(--color-text);
+    }
+
+    .lead {
+      max-width: 28rem;
+      margin: var(--space-5) 0 var(--space-8);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-md);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: var(--space-5);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      color: var(--color-text);
+    }
+
+    .icon-wrap {
+      display: grid;
+      place-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius-pill);
+      background: var(--color-action);
+      color: var(--color-text);
+      flex-shrink: 0;
+    }
+
+    .icon-wrap.green {
+      background: var(--color-green-400);
+    }
+
+    .icon-wrap :global(svg) {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .label {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+      margin-bottom: 0.15rem;
+    }
+
+    .contact-item a,
+    .value {
+      color: var(--color-text);
+      text-decoration: none;
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .contact-gallery {
+      grid-column: center / content-end;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      grid-template-rows: 1fr 1fr;
+      gap: var(--space-4);
+      align-items: end;
+      min-height: 32rem;
+    }
+
+    .large-card {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+      position: relative;
+      z-index: 1;
+      border-radius: 1.75rem;
+      overflow: hidden;
+      min-height: 25rem;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .large-card::before {
+      content: "";
+      position: absolute;
+      inset: auto auto 0 0;
+      width: 100%;
+      height: 40%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.18), transparent);
+      z-index: 1;
+    }
+
+    .large-card :global(img),
+    .small-card :global(img) {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .large-card :global(img) {
+      height: 100%;
+    }
+
+    .small-card {
+      overflow: hidden;
+      border-radius: 1.75rem;
+      min-height: 12rem;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .small-top {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+    }
+
+    .small-bottom {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      margin-top: 0.5rem;
+    }
+
+    .contact-gallery::before {
+      content: "";
+      position: absolute;
+      left: -2.2rem;
+      bottom: -2rem;
+      width: 50%;
+      height: 30%;
+      background: var(--color-green-400);
+      border-radius: 1.5rem;
+      z-index: 0;
+    }
+  }
+</style>
