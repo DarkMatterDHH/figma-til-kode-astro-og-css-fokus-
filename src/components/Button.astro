@@ -1,4 +1,6 @@
 ---
+import type { $brand } from "astro:schema";
+
 type Props = {
   // Bestemmer knappens størrelse.
   size?: "compact" | "wide";
@@ -11,6 +13,8 @@ type Props = {
 
   // Brug "light" til en lys knap, fx Login i en mørk header.
   variant?: "default" | "light";
+
+  props?: any;
 };
 
 // Standardværdier bruges, hvis der ikke gives props.
@@ -19,6 +23,7 @@ const {
   type = "button",
   href,
   variant = "default",
+  ...props
 } = Astro.props;
 
 // Samme CSS-klasser bruges til både links og knapper.
@@ -31,7 +36,7 @@ const classes = ["button", `button--${size}`, `button--${variant}`];
       <slot />
     </a>
   ) : (
-    <button class:list={classes} type={type}>
+    <button class:list={classes} type={type} {...props}>
       <slot />
     </button>
   )

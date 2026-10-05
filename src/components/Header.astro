@@ -42,7 +42,14 @@ const navItems = [
 
     <!-- Link til login-siden. -->
     <div class="login">
-      <Button href="/login">Login</Button>
+      <Button popovertarget="popup">Login</Button>
+    </div>
+    <div id="popup" popover="auto">
+      <h2>Dashboard Login</h2>
+      <p>Email address</p>
+      <input type="email" />
+      <p>Password</p>
+      <input type="password" />
     </div>
   </div>
 </header>
