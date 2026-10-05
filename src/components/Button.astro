@@ -15,6 +15,8 @@ type Props = {
   variant?: "default" | "light";
 
   props?: any;
+
+  class?: string;
 };
 
 // Standardværdier bruges, hvis der ikke gives props.
@@ -23,16 +25,17 @@ const {
   type = "button",
   href,
   variant = "default",
+  class: className,
   ...props
 } = Astro.props;
 
 // Samme CSS-klasser bruges til både links og knapper.
-const classes = ["button", `button--${size}`, `button--${variant}`];
+const classes = ["button", `button--${size}`, `button--${variant}`, className];
 ---
 
 <!-- Vis et link, hvis href er angivet; ellers vises en almindelig knap. -->{
   href ? (
-    <a class:list={classes} href={href}>
+    <a class:list={classes} href={href} {...props}>
       <slot />
     </a>
   ) : (

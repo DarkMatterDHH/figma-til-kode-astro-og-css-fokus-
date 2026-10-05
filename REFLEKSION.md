@@ -106,3 +106,39 @@ Global CSS bruger jeg til fælles styles og sidens overordnede layout. Komponent
 Jeg brugte AI til at få hjælp til CSS Grid, design tokens, Astro-billedimporter og til at sammenligne mit resultat med referencebillederne.
 
 Jeg lærte især, at det er vigtigt at kontrollere både CSS-reglerne, tokennavnene og komponenternes placering i HTML-strukturen, når noget ikke ser ud som forventet.
+
+# Eksempel 4: Komponentbaseret udvikling og iterativ designproces
+
+### Hvor og hvorfor?
+
+Jeg har arbejdet med en komponentbaseret struktur i Astro, hvor hver del af layoutet er opdelt i mindre komponenter, fx `Header.astro`, `Hero.astro`, `Services.astro`, `Counter.astro`, `Contact.astro` og `Newsletter.astro`. Det har gjort det lettere at fokusere på ét område af siden ad gangen og justere det uden at påvirke resten af designet.
+
+Det har også vist mig, at det ikke er nok at have en “rigtig” Figma-opsætning. Kode og layout er dynamiske, og de kræver konstant justering, når komponenter bliver sat sammen i den rigtige HTML-struktur. Nogle elementer virkede rigtigt i isolering, men fejlede, når de blev sat sammen i det samlede grid-system.
+
+### Relevant kode
+
+Eksempel på en simpel komponentstruktur:
+
+```astro
+<header class="site-header">...</header>
+<section class="hero">...</section>
+<section class="services">...</section>
+<section class="contact">...</section>
+<footer class="site-footer">...</footer>
+```
+
+Denne opbygning har gjort det nemmere at holde de forskellige sektioner adskilt og lettere at tilpasse.
+
+### Afprøvning og ændringer
+
+- **Jeg testede:** Jeg kørte layoutet sektion for sektion og sammenlignede designet i browseren.
+- **Jeg observerede:** Nogle sektioner virkede, når de var isoleret, men fungerede ikke, når de skulle indgå i den overordnede side. Det skyldtes ofte, at grid-linjer, z-index eller elementernes position var forkerte.
+- **Jeg ændrede eller mangler:** Jeg har gjort flere små rettelser i CSS, fx at justere spacing, padding, `grid-column` og `position` i de konkrete komponenter. Jeg vil i en senere iteration øge fokus på at rydde op i sammenhængen mellem global CSS og komponenternes lokale CSS, så det bliver mere konsistent og nemmere at vedligeholde.
+
+## Læring og refleksion
+
+Jeg har lært, at Figma-design ofte er visuelt smukt, men at det i kode kræver mere præcision og struktur. Det gælder især ved brug af CSS Grid, hvor layoutet afhænger af flere lag: container, grid-linjer, børn, komponenter og media queries.
+
+Jeg har også lært, at små fejltagelser som to `class`-attributter, ugyldige CSS-selectors eller fejl i `grid-column`-placering kan have stor effekt på hele layoutet. Derfor er det vigtigt at være systematisk og løbende teste i browseren.
+
+Det vigtigste for mig har været at forstå, at kode ikke kun handler om at få “noget til at se godt ud”, men om at skabe et stabilt og genbrugeligt layout, som kan tilpasses forskellige skærmstørrelser og stadig opretholde designets intention.

@@ -41,20 +41,30 @@ const navItems = [
     </nav>
 
     <!-- Link til login-siden. -->
-    <div class="login">
+    <div class="login anchor">
       <Button popovertarget="popup">Login</Button>
-    </div>
-    <div id="popup" popover="auto">
-      <h2>Dashboard Login</h2>
-      <p>Email address</p>
-      <input type="email" />
-      <p>Password</p>
-      <input type="password" />
     </div>
   </div>
 </header>
-
+<div id="popup" popover="auto" class="target">
+  <h2>Dashboard Login</h2>
+  <p>Email address</p>
+  <input type="email" />
+  <p>Password</p>
+  <input type="password" />
+  <Button>Go to dashboard</Button>
+</div>
 <style>
+  .anchor {
+    anchor-name: --anchor;
+  }
+
+  .target {
+    position: absolute;
+    position-anchor: --anchor;
+    position-area: bottom;
+  }
+
   .site-header {
     grid-column: full-start / full-end;
     background: var(--color-neutrals-900);
@@ -63,6 +73,7 @@ const navItems = [
   }
 
   .header-inner {
+    position: relative;
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
